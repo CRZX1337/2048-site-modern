@@ -136,10 +136,26 @@ Runs `tsc --noEmit` first, so type errors fail the build. Output goes to `dist/`
 - `prefers-reduced-motion` collapses animations to near-instant; theme motion timings otherwise differ per theme (see table).
 - Dev dependencies are unpinned (`latest`); run `npm install` output review is advised before releases.
 
+## Deployment (GitHub Pages)
+
+The app is a fully client-side static PWA deployed to:
+
+- Site: <https://crzx1337.github.io/2048-site-modern/>
+- Repository: <https://github.com/CRZX1337/2048-site-modern>
+
+How it works:
+
+- `vite.config.ts` sets `base: '/2048-site-modern/'`, so every generated asset URL carries the repository subpath. The app never assumes it is hosted at `/`.
+- `.github/workflows/deploy.yml` runs on pushes to `main` (and manually via `workflow_dispatch`): `npm ci` → `npm test` → `npm run build` → upload `dist/` → deploy with the official `deploy-pages` action. Test or build failures stop the workflow before anything is deployed.
+- PWA files are subpath-aware: the manifest uses `/2048-site-modern/` for `start_url`, `scope`, and icons; the service worker derives its base from its own registration scope and caches the subpathed shell, manifest, icons, and `/assets` bundles; registration uses `import.meta.env.BASE_URL` (`src/platform/pwa.ts`).
+- `public/.nojekyll` is shipped so GitHub Pages serves all built files as-is.
+
+Manual setup still required once in GitHub: repository **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
 ## GitHub
 
-- Owner: <https://github.com/CRZX1337>
-- Note: this working copy has no git remote configured and `package.json` carries no `repository` field, so clone/publish URLs are intentionally not listed here. Set the remote and the `repository` field when publishing.
+- Repository: <https://github.com/CRZX1337/2048-site-modern>
+- Live site: <https://crzx1337.github.io/2048-site-modern/>
 
 ## License
 

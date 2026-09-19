@@ -4,7 +4,10 @@ export function isStandalone(): boolean {
 
 export function registerPwa(): void {
   if (!('serviceWorker' in navigator) || !import.meta.env.PROD) return;
-  window.addEventListener('load', () => { void navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).catch(() => undefined); });
+  // BASE_URL carries the Vite `base` ("/2048-site-modern/" in production builds),
+  // so registration — and the worker's default scope — follows the deploy subpath.
+  const workerUrl = `${import.meta.env.BASE_URL}sw.js`;
+  window.addEventListener('load', () => { void navigator.serviceWorker.register(workerUrl, { updateViaCache: 'none' }).catch(() => undefined); });
 }
 
 export function clearDevelopmentServiceWorkers(): void {
