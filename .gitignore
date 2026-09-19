@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Vite / Vitest cache
+.vite/
+*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment files (local secrets / overrides)
+.env
+.env.*
+!.env.example
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor backups
+*~
+*.swp
+.vscode/*
+!.vscode/extensions.json
+.idea/

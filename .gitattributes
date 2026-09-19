@@ -1,0 +1,12 @@
+# Normalize line endings to LF on checkin.
+* text=auto eol=lf
+
+# Web assets treated as text for clean diffs.
+*.html text
+*.css text
+*.js text
+*.ts text
+*.json text
+*.svg text
+*.webmanifest text
+*.md text
