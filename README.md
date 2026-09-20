@@ -1,4 +1,6 @@
-<img src="logo.png" alt="2048 Studio logo" width="128" />
+<p align="center">
+  <img src="logo-rounded.png" alt="2048 Studio logo" width="128" />
+</p>
 
 # 2048 Studio
 
