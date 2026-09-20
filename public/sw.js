@@ -1,10 +1,10 @@
-const CACHE = '2048-studio-v4';
+const CACHE = '2048-studio-v5';
 // Deployment base path ("/2048-site-modern/" on GitHub Pages), derived from the
 // worker's own scope so all cached URLs and fallbacks follow the real subpath.
 const BASE = new URL(self.registration.scope).pathname;
 const INDEX = `${BASE}index.html`;
 const IS_DEV_HOST = self.location.hostname === 'localhost' || self.location.hostname === '127.0.0.1';
-const CORE = [BASE, INDEX, `${BASE}manifest.webmanifest`, `${BASE}icon-192.svg`, `${BASE}icon-512.svg`, `${BASE}icon-maskable.svg`];
+const CORE = [BASE, INDEX, `${BASE}manifest.webmanifest`, `${BASE}logo.png`, `${BASE}icon-192.png`, `${BASE}icon-512.png`, `${BASE}icon-maskable.png`, `${BASE}apple-touch-icon.png`, `${BASE}favicon-32.png`];
 const ASSET_PATTERN = new RegExp(`(?:src|href)="(${BASE.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}assets/[^"]+\\.(?:js|css))"`, 'g');
 
 self.addEventListener('install', event => {

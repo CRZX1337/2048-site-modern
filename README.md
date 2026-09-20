@@ -1,3 +1,5 @@
+<img src="logo.png" alt="2048 Studio logo" width="128" />
+
 # 2048 Studio
 
 A polished, local-first 2048 game built with TypeScript and Vite. No backend, no accounts, no tracking — the full game runs in the browser, works offline once installed, and saves progress to `localStorage`.
@@ -15,7 +17,7 @@ A polished, local-first 2048 game built with TypeScript and Vite. No backend, no
 - Light/dark appearance for every theme (Modern is dark-first, the rest are light-first)
 - Keyboard input (arrow keys + WASD) and pointer swipe (touch and mouse drag, 24 px threshold)
 - Automatic saving to `localStorage` on every action and on background/page-hide; corrupt saves are discarded and a fresh game starts
-- Installable PWA: web manifest, SVG icons (192/512/maskable), and an offline-first service worker (production builds only)
+- Installable PWA: web manifest, PNG icons derived from `logo.png` (192/512/maskable, plus Apple touch icon and favicon), and an offline-first service worker (production builds only)
 - Accessibility: ARIA grid labeling with a per-tile board summary, live-region status announcements, keyboard focus restore after dialogs, visible focus outlines, and `prefers-reduced-motion` support
 
 ## Themes
@@ -25,7 +27,7 @@ All themes are defined in `src/themes/` and implement the same `ThemeDefinition`
 | Theme | Label | Note | Move / Merge / Spawn | Easing |
 |---|---|---|---|---|
 | `apple` (default) | Apple | Quietly refined | 180 / 220 / 180 ms | `cubic-bezier(.2,.8,.2,1)` |
-| `glass` | Liquid Glass | Light in motion | 220 / 300 / 260 ms | `cubic-bezier(.16,1,.3,1)` |
+| `glass` | Liquid Glass | Light in motion | 190 / 260 / 220 ms | `cubic-bezier(.32,.72,.24,1.15)` |
 | `material` | Material | Structured energy | 200 / 240 / 180 ms | `cubic-bezier(.2,0,0,1)` |
 | `oldschool` | Oldschool | Classic arcade | 120 / 140 / 100 ms | `steps(3,end)` |
 | `modern` | Modern | Boldly minimal | 160 / 190 / 150 ms | `cubic-bezier(.22,1,.36,1)` |
@@ -34,7 +36,7 @@ Visual notes (from `src/styles.css`):
 
 - **Apple:** soft light surfaces with warm orange accents; blurred ambient orbs.
 - **Liquid Glass:** frosted-glass panels (`backdrop-filter` blur + saturate), aurora gradient, film grain, specular tile highlights.
-- **Material:** Material-3-like purple (`#6750a4`), rail accent, compact radii, elevated cards.
+- **Material:** Material-3-like purple (`#6750a4`), compact radii, elevated cards.
 - **Oldschool:** CRT arcade look — monospace type, hard offset shadows, scanlines, vignette, dot-matrix texture; merge animation uses its own keyframes.
 - **Modern:** dark-first editorial style with lime accent (`#d7f36a`) and a fading blueprint grid; flat tiles with a glow on 1024+.
 
@@ -47,7 +49,7 @@ Tiles valued above 2048 share a single `super` style bucket in every theme.
 - `visualViewport`-based `--visual-viewport-height` plus an orientation dataset, keeping the board sized correctly when browser chrome shows/hides or the device rotates
 - Standalone detection (`display-mode: standalone` + iOS `navigator.standalone`) stored in app state
 - `touch-action: none` on the board for reliable swipe handling; 44 px icon buttons as touch targets
-- Manifest (`public/manifest.webmanifest`): `display: standalone`, `orientation: portrait`, three SVG icons
+- Manifest (`public/manifest.webmanifest`): `display: standalone`, `orientation: portrait`, PNG icons (`icon-192.png`, `icon-512.png`, `icon-maskable.png`) derived from `logo.png`
 - Service worker (`public/sw.js`, cache `2048-studio-v3`): precaches the shell, manifest, icons, and parsed `/assets` bundles; navigations are network-first with an `index.html` fallback; other GETs are cache-first with runtime caching. It registers **only in production builds**; development builds unregister service workers and clear app caches instead.
 - Lifecycle handling: hiding the page or navigating away cancels the active gesture/animation and persists immediately; returning to the page persists again.
 
@@ -84,7 +86,7 @@ Details live in [`docs/architecture.md`](docs/architecture.md). Module map:
 | Persistence | `src/persistence/{storage,schema}.ts` |
 | Platform / PWA | `src/platform/{viewport,lifecycle,pwa}.ts` |
 | Styles (all themes) | `src/styles.css` |
-| PWA assets | `public/{manifest.webmanifest,sw.js,icon-*.svg}` |
+| PWA assets | `public/{manifest.webmanifest,sw.js,logo.png,icon-*.png,apple-touch-icon.png,favicon-32.png}` |
 | Tests | `tests/{game,persistence}.test.ts` |
 
 ## Setup

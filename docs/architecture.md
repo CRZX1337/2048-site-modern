@@ -82,8 +82,8 @@ Pure, dependency-free logic; the only impure input is an injectable `RandomSourc
 - `viewport.ts` — tracks `visualViewport`/window size into `--visual-viewport-height` and a portrait/landscape dataset for CSS.
 - `lifecycle.ts` — `visibilitychange` + `pagehide`: backgrounding cancels input/animation and persists; foregrounding persists.
 - `pwa.ts` — standalone detection; `registerPwa()` only when service workers exist **and** `import.meta.env.PROD`, deferred to window `load`; `clearDevelopmentServiceWorkers()` unregisters workers and wipes `2048-studio-*` caches in dev.
-- `public/sw.js` — cache `2048-studio-v3`; precaches shell/manifest/icons plus `/assets` bundles parsed from `index.html`; skip-waiting only on dev hosts (production updates wait); navigations network-first with cached-`index.html` fallback; other GETs cache-first with runtime caching.
-- `public/manifest.webmanifest` — standalone, portrait, theme/background `#f7f4ef`, three SVG icons.
+- `public/sw.js` — cache `2048-studio-v5`; precaches shell/manifest/logo/icons plus `/assets` bundles parsed from `index.html`; skip-waiting only on dev hosts (production updates wait); navigations network-first with cached-`index.html` fallback; other GETs cache-first with runtime caching.
+- `public/manifest.webmanifest` — standalone, portrait, theme/background `#f7f4ef`, three PNG icons (`icon-192.png`, `icon-512.png`, `icon-maskable.png`) derived from `logo.png`.
 
 ### 10. Accessibility
 
