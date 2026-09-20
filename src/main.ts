@@ -1,4 +1,5 @@
 import './styles.css';
+import './themes/glass.css';
 import { AppController } from './app/controller';
 import { setupInput } from './input/controller';
 import { getTheme, themeRegistry, type ThemeName } from './themes/registry';
